@@ -42,4 +42,9 @@ public class BoardVO {
 		this.dislikeNumber = dislikeNumber;
 	}
 	
+	public void printLog() {
+		System.out.println("boardNumber : " + getBoardNumber() + " / ID : " + getId() + " / 내용 : " + getContent() + " / 좋아요 수 : " + getLikeNumber() + " / 싫어요 수 : " + getDislikeNumber());
+	}
+	
+	
 }

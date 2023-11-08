@@ -50,6 +50,9 @@ public class UserVO {
 		this.studentId = studentId;
 	}
 	
+	public void printLog() {
+		System.out.println("ID : " + getId() + " / PW : " + getPasswd() + " / 이름 : " + getUserName() + " / 전화번호 : " + getMobile() + " / 이메일 : " + getEmail() + " / 학번 : " + getStudentId());
+	}
 	
 	
 }
