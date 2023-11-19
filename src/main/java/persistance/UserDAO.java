@@ -24,6 +24,7 @@ public class UserDAO {
 			pstmt.setString(3, user.getMobile());
 			pstmt.setString(4, user.getEmail());
 			pstmt.setInt(5, user.getStudentId());
+			// 6번째도 필요함
 			pstmt.executeUpdate();
 		}
 
