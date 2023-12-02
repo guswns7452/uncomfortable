@@ -1,34 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 
 <head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css" rel="stylesheet" />
-    <link href="<c:url value="/resource/signup.css"/>" rel="stylesheet" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css"
+	rel="stylesheet" />
+<link href="<c:url value="/resource/signup.css"/>" rel="stylesheet" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap"
+	rel="stylesheet">
 </head>
 
 <body>
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+	<nav class="bg-white border-gray-200 dark:bg-gray-900">
 		<div
 			class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-			<a href="/uncomfortable/board" class="flex items-center"> <!-- ${pageContext.request.contextPath}/resources/views/CP_CoP_front/icon -->
+			<a href="/" class="flex items-center"> <!-- ${pageContext.request.contextPath}/resources/views/CP_CoP_front/icon -->
 				<div class="font-bold text-2xl" style="font-family: 'Oswald';">Uncomfortable
 					University</div>
 			</a>
 			<div class="flex items-center md:order-2">
 				<!-- 로그인 버튼 -->
 				<c:choose>
-					<c:when test="${sessionScope.user eq null}">
-						<a href="/uncomfortable/user/login">
+					<c:when test="${sessionScope.customer eq null}">
+						<a href="/login">
 							<button type="button"
-								class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">로그인</button>
+								class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">로그인</button>
 						</a>
 					</c:when>
 					<c:otherwise>
@@ -39,7 +42,7 @@
 							data-dropdown-placement="bottom">
 							<span class="sr-only">Open user menu</span> <img
 								class="w-8 h-8 rounded-full background_color_white"
-								src="<c:url value="/resource/OtterDog.jpg"/>"
+								src="${pageContext.request.contextPath}/resources/views/CP_CoP_front/icon/${customer.customerImage}"
 								alt="user photo">
 						</button>
 					</c:otherwise>
@@ -49,22 +52,29 @@
 					class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
 					id="user-dropdown">
 					<div class="px-4 py-3">
-						<span class="block font-bold text-gray-900 dark:text-white">${user.id}</span>
-						<span class="block text-sm text-gray-900 dark:text-white">${user.userName}</span>
+						<span class="block font-bold text-gray-900 dark:text-white">${customer.customerID}</span>
+						<span class="block text-sm text-gray-900 dark:text-white">${customer.customerNickname}</span>
 						<span
-							class="block text-sm  text-gray-500 truncate dark:text-gray-400">${user.studentId}</span>
+							class="block text-sm  text-gray-500 truncate dark:text-gray-400">${customer.email}</span>
 					</div>
 					<ul class="py-2" aria-labelledby="user-menu-button">
-						<li><a href="/uncomfortable/user/mypage"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mypage</a>
+						<li><a href="/mypage/dashboard"
+							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+						</li>
+						<li><a href="#"
+							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+						</li>
+						<li><a href="#"
+							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
 						</li>
 						<form class="hover:bg-gray-100 dark:hover:bg-gray-600"
-							action="/uncomfortable/user/logout.do" method="post">
+							action="/logout" method="post">
 							<button type="submit"
 								class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-								Log out</button>
+								Sign out</button>
 						</form>
 					</ul>
+
 				</div>
 				<button data-collapse-toggle="navbar-user" type="button"
 					class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -80,29 +90,30 @@
 			</div>
 			<!--  -->
 			<div
-				class="alignCenter items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+				class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
 				id="navbar-user">
 				<ul
-					style="margin-top: 0px;" class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-					<li><a href="/uncomfortable/board"
-						class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+					class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+					<li><a href="/"
+						class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
 						aria-current="page">Home</a></li>
-					<li><a href="/uncomfortable/board/top"
+					<li><a href="/question/questionmain?language=c"
 						class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Top
 							10</a></li>
-					<li><a href="/uncomfortable/user/mypage"
-						class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500">마이페이지</a>
+					<li><a href="/study/list?page=1"
+						class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">마이페이지</a>
 					</li>
+
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-    <div class="bg-gray-50 pd-b60 center__signup">
-        <div class="signup_title">정보수정</div>
-        
-        <form class="form__signup" name=form
-			action="/uncomfortable/user/mypage/edit.do" method="post">
+	<div class="bg-gray-50 pd-b60 center__signup">
+		<div class="signup_title">회원가입</div>
+
+		<form class="form__signup" name=form
+			action="/uncomfortable/user/signup.do" method="post">
 			<div class="mb-6">
 				<div class="mb-6">
 					<label for="website-admin"
@@ -119,7 +130,7 @@
 						</span> 
 						<input name="id" type="text" id="website-admin"
 							class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="ID" value="${user.id}"required>
+							placeholder="ID" required>
 					</div>
 				</div>
 				<div class="mb-6">
@@ -136,7 +147,7 @@
                             </svg>
 						</span> <input name="userName" type="text" id="website-admin"
 							class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="홍길동" value="${user.userName}" required>
+							placeholder="홍길동" required>
 					</div>
 				</div>
 
@@ -149,7 +160,7 @@
 							🔢
 						</span> <input name="studentId" type="text" id="website-admin"
 							class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="2023150000" value="${user.studentId}" required>
+							placeholder="2023150000" required>
 					</div>
 				</div>
 
@@ -168,7 +179,7 @@
                             </svg>
 						</span> <input name="email" type="email" id="website-admin"
 							class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="abc@tukorea.ac.kr" value="${user.email}"required>
+							placeholder="abc@tukorea.ac.kr" required>
 					</div>
 				</div>
 
@@ -181,7 +192,7 @@
 							📱
 						</span> <input name="mobile" type="text" id="website-admin"
 							class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="01012345678" value="${user.mobile}" required>
+							placeholder="01012345678" required>
 					</div>
 				</div>
 
@@ -218,9 +229,11 @@
 					style="background-color: #5099f1 !important;">Submit</button>
 			</div>
 		</form>
-    </div>
-    
-    <script src="signup.js"> </script>
+	</div>
+
+	<script src="<c:url value="/resource/signup.js"/>">
+		
+	</script>
 </body>
 
 </html>

@@ -74,6 +74,13 @@
     background-image: none !important; /* 배경 이미지가 있을 경우 이 설정을 추가해보세요 */
 }
 
+.boardCenter{
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Noto Sans KR', sans-serif;
+	
+}
+
 .banner h1 {
     color: #ffffff;
     font-size: 50px;

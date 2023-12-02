@@ -73,25 +73,31 @@ public class userController extends HttpServlet {
 
 		// 마이페이지
 		if (command.equals("/user/mypage/edit.do")) {
-			update(request,response);
+			UserVO user = new UserVO();
+			user.setPasswd(request.getParameter("passwd"));
+			user.setStudentId(Integer.parseInt(request.getParameter("studentId")));
+			user.setUserName(request.getParameter("passwd"));
+			user.setMobile(request.getParameter("mobile"));
+			user.setEmail(request.getParameter("email"));
+			
+			update(request, response);
 			RequestDispatcher rd = request.getRequestDispatcher("/");
 			rd.forward(request, response);
 		}
 
 		// 회원가입
-		else if (command.equals("/signup")) {
+		else if (command.equals("/user/signup")) {
+			RequestDispatcher rd = request.getRequestDispatcher("/signup.jsp");
+			rd.forward(request, response);
+		}
+		
+		else if (command.equals("/user/signup.do")) {
 			regist(request, response);
 			// FIXME jsp 부분 변경해야함.
-			RequestDispatcher rd = request.getRequestDispatcher("./board/main.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/");
 			rd.forward(request, response);
 		}
-		// 정보 수정
-		else {
-			update(request, response);
-			// FIXME jsp 부분 변경해야함.
-			RequestDispatcher rd = request.getRequestDispatcher("./board/main.jsp");
-			rd.forward(request, response);
-		}
+		
 
 	}
 
@@ -198,7 +204,9 @@ public class userController extends HttpServlet {
 			user.setMobile(request.getParameter("mobile"));
 			user.setEmail(request.getParameter("email"));
 			user.setStudentId(Integer.parseInt(request.getParameter("studentId")));
-
+			
+			System.out.println(user.getId());
+			
 			int result = userDAO.updateUser(user);
 			if (result == -1) {
 				// 중복 아이디 입력시
