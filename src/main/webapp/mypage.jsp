@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -6,11 +7,11 @@
 
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css" rel="stylesheet" />
-    <link href="<c:url value="/resource/login.css"/>" rel="stylesheet" />
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 			<div class="flex items-center md:order-2">
 				<!-- 로그인 버튼 -->
 				<c:choose>
-					<c:when test="${sessionScope.customer eq null}">
+					<c:when test="${sessionScope.user eq null}">
 						<a href="/uncomfortable/user/login">
 							<button type="button"
 								class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">로그인</button>
@@ -38,7 +39,7 @@
 							data-dropdown-placement="bottom">
 							<span class="sr-only">Open user menu</span> <img
 								class="w-8 h-8 rounded-full background_color_white"
-								src=".."
+								src="<c:url value="/resource/OtterDog.jpg"/>"
 								alt="user photo">
 						</button>
 					</c:otherwise>
@@ -54,23 +55,16 @@
 							class="block text-sm  text-gray-500 truncate dark:text-gray-400">${user.studentId}</span>
 					</div>
 					<ul class="py-2" aria-labelledby="user-menu-button">
-						<li><a href="/mypage/dashboard"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-						</li>
-						<li><a href="#"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-						</li>
-						<li><a href="#"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+						<li><a href="/user/mypage"
+							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mypage</a>
 						</li>
 						<form class="hover:bg-gray-100 dark:hover:bg-gray-600"
-							action="/logout" method="post">
+							action="/uncomfortable/user/logout.do" method="post">
 							<button type="submit"
 								class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-								Sign out</button>
+								Log out</button>
 						</form>
 					</ul>
-
 				</div>
 				<button data-collapse-toggle="navbar-user" type="button"
 					class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -97,56 +91,39 @@
 						class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Top
 							10</a></li>
 					<li><a href="/uncomfortable/user/mypage"
-						class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">마이페이지</a>
+						class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500">마이페이지</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-    <div class="bg-green-10 pd-b200 flex_mode">
-        <section class="bg-green-10 dark:bg-gray-900 sector_flex">
-            <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                <a href="#" class="flex items-center text-2xl font-semibold text-gray-900 dark:text-white dragon-png">
-                    <div style="font-family: 'Oswald';">Uncomfortable University</div>
-                </a>
-                <div
-                    class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1
-                            class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                            로그인 하세요
-                        </h1>
-                        <form class="space-y-4 md:space-y-6" name=form action="/uncomfortable/user/login.do" method="post">
-                            <div>
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    아이디</label>
-                                <input type="text" name="id" id="email"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="ID" required=""> 
-                            </div>
-                            <div>
-                                <label for="password"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
-                                <input type="password" name="passwd" id="password" placeholder="••••••••"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required="">
-                            </div>
-                            <button type="submit"
-                                class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none button_color focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign
-                                in</button>
-                            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Don’t have an account yet? <a href="signup"
-                                    class="font-medium text-primary-600 hover:underline dark:text-primary-500 font_color_lime">Sign
-                                    up</a>
-                            </p>
-                        </form>
-                    </div>
-                </div>
+    <div>
+        <section class="bg-white dark:bg-gray-900">
+            <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
+                <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
+                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Mypage</h2>
+                </div> 
+                <div class=" gap-8 mb-6 lg:mb-16 ">
+                    <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
+                        <a href="#">
+                            <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" style="width:300px;" src="<c:url value="/resource/OtterDog.jpg"/>" alt="Bonnie Avatar">
+                        </a>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <a href="#">${user.userName}</a>
+                            </h3>
+                            <span class="text-gray-500 dark:text-gray-400">컴퓨터공학과</span>
+                            <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">✔️ 학번 : ${user.studentId}</p>
+                            <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">✔️ 아이디 : ${user.id}</p>
+                            <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">✔️ 작성한 글 갯수 : 3개</p>
+                            <button onclick="location.href='/uncomfortable/user/mypage/edit' " style="background-color: #5099f1 !important;" class="button_color text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">회원정보 변경</button>
+                        </div>
+                    </div> 
+                </div>  
             </div>
         </section>
     </div>
-
 </body>
 
 </html>

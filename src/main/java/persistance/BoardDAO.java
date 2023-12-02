@@ -223,6 +223,99 @@ public class BoardDAO {
 		}
 	}
 
+	
+	public void like(int boardNumber) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql;
+		
+		// boardNumber로 현재 좋아요 수 불러옴
+		sql = "select likeNumber from board where boardNumber = ?";
+
+		// 예외처리 시작, DB 연결 시작
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (boardNumber));
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			int likeNumber = rs.getInt(1);
+			
+			// 업데이트 실행
+			sql = "update board set likeNumber = ? where boardNumber = ?";
+			
+			pstmt.close();
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (likeNumber+1));
+			pstmt.setInt(2, (boardNumber));
+			pstmt.executeUpdate();
+
+		} catch (Exception ex) {
+			System.out.println("delete() 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception ex) {
+				throw new RuntimeException(ex.getMessage());
+			}
+		}
+	}
+	
+	public void dislike(int boardNumber) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql;
+		
+		// boardNumber로 현재 좋아요 수 불러옴
+		sql = "select dislikeNumber from board where boardNumber = ?";
+
+		// 예외처리 시작, DB 연결 시작
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (boardNumber));
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			int dislikeNumber = rs.getInt(1);
+			
+			// 업데이트 실행
+			sql = "update board set dislikeNumber = ? where boardNumber = ?";
+			
+			pstmt.close();
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (dislikeNumber+1));
+			pstmt.setInt(2, (boardNumber));
+			pstmt.executeUpdate();
+
+		} catch (Exception ex) {
+			System.out.println("like() 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception ex) {
+				throw new RuntimeException(ex.getMessage());
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("현재 DB에 있는 갯수 : " + getListCount());
 		

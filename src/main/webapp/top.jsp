@@ -2,21 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css"
 	rel="stylesheet" />
-<link href="<c:url value="/resource/main.css"/>" rel="stylesheet" />
+<link href="<c:url value="/resource/top10.css"/>" rel="stylesheet" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
 	href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap"
 	rel="stylesheet">
-
-
 </head>
 
 
@@ -45,8 +43,7 @@
 							data-dropdown-placement="bottom">
 							<span class="sr-only">Open user menu</span> <img
 								class="w-8 h-8 rounded-full background_color_white"
-								src="<c:url value="/resource/OtterDog.jpg"/>"
-								alt="user photo">
+								src="<c:url value="/resource/OtterDog.jpg"/>" alt="user photo">
 						</button>
 					</c:otherwise>
 				</c:choose>
@@ -88,13 +85,13 @@
 			<div
 				class="alignCenter items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
 				id="navbar-user">
-				<ul
-					style="margin-top: 0px;" class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+				<ul style="margin-top: 0px;"
+					class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 					<li><a href="/uncomfortable/board"
-						class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+						class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
 						aria-current="page">Home</a></li>
 					<li><a href="/uncomfortable/board/top"
-						class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Top
+						class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500">Top
 							10</a></li>
 					<li><a href="/uncomfortable/user/mypage"
 						class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">마이페이지</a>
@@ -104,55 +101,75 @@
 		</div>
 	</nav>
 
-	<div class="banner">
-		<h1>Uncomfortable University</h1>
-		<p>대학 생활을 하면서 불편한 점을 서로 나누어 보세요!</p>
-	</div>
-	<!-- 여기부터 수정 및 추가 -->
-	<div class="mt-4 text-center">
-		<label for="comment" class="block fontShare font-medium text-gray-700">📢 여러분들의 의견을
-			공유해 보세요!</label>
-		
-		<form class="submitForm" action="/uncomfortable/board/write.do" method="post">
-			<input type="text" id="comment" name="content"  
-				class="mt-1 p-2 border rounded-md content"></input>
-	
-			<!-- 의견 등록 버튼 추가 -->
-			<button type="button"
-				class="mt-2 p-2 bg-blue-500 text-white rounded-md" onclick="submitComment()">의견 등록</button>
-		</form>
-	</div>
+	<div class="top10Title text-5xl font-bold">Top10</div>
+	<div class="top10Content text-xl font-bold">학생들의 공감을 많이 받은 글을
+		살펴보세요!</div>
+	<div class="flexCenter">
+		<!-- Text box 1 -->
+		<c:forEach items="${boardListTop}" var="board" varStatus="i" begin="0"
+			end="2">
+			<div href="#"
+				class="flexBlock block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+				<h5
+					class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${i.count}위</h5>
+				<div style="display: none;" class="likeNumber">${board.likeNumber}</div>
+				<div style="display: none;" class="dislikeNumber">${board.dislikeNumber}</div>
+				<div style="display: none;" class="boardNumber">${board.boardNumber}</div>
+				<h6
+					class="mb-2 text-mi font-bold tracking-tight text-gray-900 dark:text-white">익명
+					${board.boardNumber}</h6>
+				<p class="font-normal text-gray-700 dark:text-gray-400">${board.content}</p>
 
-	<div class="Boards">
-		<c:forEach items="${boardList}" var="board" varStatus="i">
-			<div id="output-box1" class="relative">
-				<label for="output-text"
-					class="block text-lg font-bold text-gray-700"
-					style="position: absolute; top: 10px; left: 15px;">익명 ${board.boardNumber}</label>
-				<div id="output-text"
-					class="mt-1 p-2 border rounded-md overflow-auto"
-					style="position: relative; top: 40px; left: 5px; max-height: 150px;">${board.content}</div>
-	
-				<!-- 좋아요와 싫어요 버튼 -->
-				<div
-					class="flex mt-2 absolute bottom-0 left-0 right-0 justify-center" style="margin-bottom: 10px;">
-					<form action="/uncomfortable/board/like.do" method="post">
-						<input class="boardNumber" type="hidden" name="boardNumber" value="${board.boardNumber}">
-						<button onclick="likeComment(${board.boardNumber})" type="button" name="likeNumber" value="${board.likeNumber}" class="mr-2 p-2 bg-green-500 text-white rounded-md likeNumber">좋아요 ${board.likeNumber}</button>
-					</form>
-					<form action="/uncomfortable/board/dislike.do" method="post">
-						<input type="hidden" name="boardNumber" value="${board.boardNumber}">
-						<button onclick="dislikeComment(${board.boardNumber})" type="button" name="dislikeNumber" value="${board.dislikeNumber}" class="p-2 bg-red-500 text-white rounded-md dislikeNumber">싫어요 ${board.dislikeNumber}</button>
-					</form>
+				<!-- Like and dislike buttons with counters -->
+				<div class="flex mt-2 justify-between">
+					<div class="flex items-center">
+						<button class="mr-2 p-2 bg-green-500 text-white rounded-md"
+							onclick="likeComment(${i.count})">좋아요
+							${board.likeNumber}</button>
+
+					</div>
+					<div class="flex items-center">
+						<button class="p-2 bg-red-500 text-white rounded-md"
+							onclick="dislikeComment(${i.count})">싫어요
+							${board.dislikeNumber}</button>
+
+					</div>
 				</div>
 			</div>
 		</c:forEach>
 	</div>
-	<!-- 출력 박스 -->
+
+	<c:forEach items="${boardListTop}" var="board" varStatus="i" begin="3"
+		end="9">
+		<div class="flexList">
+			<div style="display: none;" class="likeNumber">${board.likeNumber}</div>
+			<div style="display: none;" class="dislikeNumber">${board.dislikeNumber}</div>
+			<div style="display: none;" class="boardNumber">${board.boardNumber}</div>
+
+			<div href="#"
+				class="flexBlockList block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+				<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${i.index+1}위</h5>
+				<h6 class="mb-2 text-mi font-bold tracking-tight text-gray-900 dark:text-white">익명 ${board.boardNumber}</h6>
+				<p class="font-normal text-gray-700 dark:text-gray-400">${board.content}</p>
 
 
- <script>
-    // 좋아요 버튼 클릭 시 동작
+				<div class="flex mt-2 justify-between">
+					<div class="flex items-center">
+						<button class="mr-2 p-2 bg-green-500 text-white rounded-md"
+							onclick="likeComment(${i.count})">좋아요 ${board.likeNumber}</button>
+
+					</div>
+					<div class="flex items-center">
+						<button class="p-2 bg-red-500 text-white rounded-md"
+							onclick="dislikeComment(${i.count})">싫어요 ${board.dislikeNumber}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+
+	<script>
+ // 좋아요 버튼 클릭 시 동작
     function likeComment(boardNumber) {
     	alert ('좋아요 반영되었습니다!');
     	
@@ -163,7 +180,7 @@
         	    headers: {
         	        'Content-Type': 'application/x-www-form-urlencoded'
         	    },
-        	    body: 'boardNumber='+document.querySelectorAll(".boardNumber")[boardNumber-1].value+'&likeNumber='+document.querySelectorAll(".likeNumber")[boardNumber-1].value
+        	    body: 'boardNumber='+document.querySelectorAll(".boardNumber")[boardNumber-1].textContent+'&likeNumber='+document.querySelectorAll(".likeNumber")[boardNumber-1].textContent
         	})
             .then(response => response.json());    
             
@@ -182,36 +199,13 @@
         	    headers: {
         	        'Content-Type': 'application/x-www-form-urlencoded'
         	    },
-        	    body: 'boardNumber='+document.querySelectorAll(".boardNumber")[boardNumber-1].value+'&dislikeNumber='+document.querySelectorAll(".dislikeNumber")[boardNumber-1].value
+        	    body: 'boardNumber='+document.querySelectorAll(".boardNumber")[boardNumber-1].textContent+'&dislikeNumber='+document.querySelectorAll(".dislikeNumber")[boardNumber-1].textContent
         	})
             .then(response => response.json());    
             
         location.reload();
     }
+    </script>
+</body>
 
-    function submitComment() {
-        // 백엔드에서 가져올 텍스트 대신에 임시로 "텍스트"를 표시
-        if(document.querySelector(".content").value == ''){
-        	alert('의견을 작성해주세요.')
-        }
-        else {
-        	alert ('의견 등록했습니다!');
-        	
-            // 서버로 좋아요 클릭을 전송
-            fetch('/uncomfortable/board/write.do', { 
-            	method: 'POST',
-            	 cache: 'no-cache',
-            	    headers: {
-            	        'Content-Type': 'application/x-www-form-urlencoded'
-            	    },
-            	    body: 'content='+document.querySelector(".content").value
-            	})
-                .then(response => response.json());    
-                
-            location.reload();
-        }
-		
-    }
-</script> 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
+</html>

@@ -1,0 +1,46 @@
+body{
+    background-color: rgba(250, 250, 250, 0.219);
+}
+
+.flexCenter{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+    
+}
+
+/* 코드 변경 */
+.bg-gradient-to-br,
+.from-pink-500,
+.to-orange-400 {
+    background-color: #5099f1 !important;
+    background-image: none !important; /* 배경 이미지가 있을 경우 이 설정을 추가해보세요 */
+}
+
+.flexList{
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.flexBlock{
+    margin-right: 20px;
+    min-width: 400px;
+    background-color: #D4E7FF !important;
+}
+
+.flexBlockList{
+    min-width: 700px;
+    background-color: #D4E7FF !important;
+}
+
+.top10Title{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.top10Content{
+    text-align: center;
+    margin-bottom: 50px;
+}

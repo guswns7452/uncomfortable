@@ -1,0 +1,47 @@
+/* =============== HEADER =================== */
+.background_color_white {
+    background-color: white;
+    border-radius: 1px;
+    border-color: azure;
+}
+
+.footer-logo{
+    width:200px;
+}
+/*====================================== */
+
+.center__signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step_kara{
+    width: 25%;
+    margin-bottom: 50px;
+}
+
+.form__signup {
+    width: 40%;
+}
+.pd-b60{
+    padding-bottom: 60px;
+}
+
+.button_color{
+    background-color: #65a30d !important;
+}
+
+.button_color:hover{
+    background-color: #46700b !important;
+}
+
+.signup_title {
+    font-size: 50px;
+    padding: 50px 50px;
+}
+
+.margin__left{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
