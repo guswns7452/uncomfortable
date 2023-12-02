@@ -1,0 +1,89 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@600&family=Oswald:wght@700&display=swap');
+
+/* 코드 변경 텍스트 박스 추가 */
+.mt-4.text-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.submitForm{
+	width: 600px;
+}
+
+.fontShare{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	font-weight: bolder;
+	margin-bottom: 20px; 
+}
+
+#comment {
+	width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+	height: 200px;
+	max-width: 600px; /* 코멘트 추가 */
+}
+/* 코드 변경 */
+.mt-2.p-2.bg-blue-500.text-white.rounded-md {
+	width: 50%;
+}
+
+.alignCenter{
+	display: flex;
+	align-items: center;
+}
+
+/* 코드 변경 텍스트 넣을 박스 추가 */
+#output-box1 {
+	width: 100%;
+	max-width: 800px;
+	position: relative;
+	top: 100px;
+	height: 200px;
+	padding: 20px;
+	background-color: #b0d4ff;
+	color: #000;
+	margin: 20px auto;
+	text-align: center;
+	border-radius: 8px;
+	line-height: 2em;
+}
+
+/* 코드 변경 */
+.banner {
+    background-color: #5099f1;
+    text-align: center;
+    padding: 20px;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    height: 20%;
+}
+
+/* 코드 변경 */
+.bg-gradient-to-br,
+.from-pink-500,
+.to-orange-400 {
+    background-color: #5099f1 !important;
+    background-image: none !important; /* 배경 이미지가 있을 경우 이 설정을 추가해보세요 */
+}
+
+.banner h1 {
+    color: #ffffff;
+    font-size: 50px;
+    font-family: "Noto Sans", Arial, sans-serif;
+    margin: 0;
+}
+
+.banner p {
+    color: #ffffff;
+    font-size: 20px;
+    font-family: "Noto Sans", Arial, sans-serif;
+    margin: 10px 0 0;
+}
+
+.mt-4 {
+    margin-top: 50px; /* 또는 필요한 만큼의 값으로 조정 */
+}

@@ -10,7 +10,7 @@ public class DBConnection {
 
 		Connection conn = null;		
 	
-		String url = "jdbc:mysql://localhost:3306/web_db";
+		String url = "jdbc:mysql://localhost:3306/uncomfortable?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC";
 		String user = "jspbook";
 		String password = "passwd";
 

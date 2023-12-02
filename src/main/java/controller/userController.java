@@ -6,14 +6,18 @@ import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import domain.UserVO;
 import persistance.UserDAO;
 
-public class userController {
+public class userController extends HttpServlet{
 
+	private static final long serialVersionUID = 1L;
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
@@ -26,13 +30,15 @@ public class userController {
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 
-		// 로그인
-		if (command.equals("/login")) {// 글 등록하기
-			login(request, response);
-			// FIXME jsp 부분 변경해야함.
-			RequestDispatcher rd = request.getRequestDispatcher("./board/main.jsp");
+		System.out.println("[User Request] " + command);
+		
+		// 로그인 페이지 요청
+		if (command.equals("/user/login")) {
+			System.out.println("tlqkf");
+			RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
 			rd.forward(request, response);
 		}
+		
 		// 회원가입
 		else if (command.equals("/signup")) {
 			regist(request, response);
@@ -61,6 +67,12 @@ public class userController {
 			// 메인 페이지
 			// FIXME jsp 부분 변경해야함.
 			// script.println("location.href = 'main.jsp'");
+			
+			// 로그인 성공시 세션 등록
+			HttpSession session = request.getSession(); // 에러 발생할 수도 있음. 아닐 수도.
+			session.setAttribute("customer", request.getParameter("id"));
+			session.setMaxInactiveInterval(1800); // 30분 동안 session 유지
+			
 			script.println("</script>");
 		} else if (result == 0) {
 			// 비밀번호 틀림

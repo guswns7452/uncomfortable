@@ -1,0 +1,55 @@
+/* =============== HEADER =================== */
+body{
+    background-color: #f9fafb;
+}
+.background_color_white {
+    background-color: white;
+    border-radius: 1px;
+    border-color: azure;
+}
+.footer-logo{
+    width:200px;
+}
+/*====================================== */
+
+.flex_mode{
+    display: flex;
+    justify-content: center;
+}
+
+/* 코드 변경 */
+.bg-green-10 {
+    background-color: #b0d4ff; /* 중간 부분의 배경 색상을 #b0d4ff로 설정합니다. */
+}
+
+/* 코드 변경 */
+.bg-gradient-to-br,
+.from-pink-500,
+.to-orange-400 {
+    background-color: #5099f1 !important;
+    background-image: none !important; /* 배경 이미지가 있을 경우 이 설정을 추가해보세요 */
+}
+
+
+.center{
+	width:100%;
+}
+.sector_flex{
+    width: 40%;
+    padding-top: 150px;
+}
+.dragon-png{
+    margin-bottom : 50px;
+}
+/* 코드 변경 */
+.button_color{
+    background-color: #5099f1 !important;
+}
+/* 코드 변경 */
+.font_color_lime{
+    color: #5099f1 !important;
+}
+
+.pd-b200 {
+    padding-bottom: 180px;
+}

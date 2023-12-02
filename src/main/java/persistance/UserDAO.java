@@ -19,7 +19,7 @@ public class UserDAO {
 			String sql = "insert into user values(?, ?, ?, ?, ?, ?)";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user.getId())
+			pstmt.setString(1, user.getId());
 			pstmt.setString(2, user.getPasswd());
 			pstmt.setString(3, user.getUserName());
 			pstmt.setString(4, user.getMobile());
