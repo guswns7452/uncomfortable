@@ -198,7 +198,7 @@ public class BoardDAO {
 		String sql;
 		
 		// boardNumber로 삭제함
-		sql = "delete * from board where boardNumber = ?";
+		sql = "delete from board where boardNumber = ?";
 
 		// 예외처리 시작, DB 연결 시작
 		try {

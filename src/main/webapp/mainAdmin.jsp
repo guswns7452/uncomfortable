@@ -124,9 +124,8 @@
 		</form>
 	</div>
 
-	<div class="text-3xl font-bold"
-		style="text-align: center; margin-top: 100px;">글 둘러보기</div>
-
+	<div class="text-3xl font-bold" style="text-align:center; margin-top:100px;">글 둘러보기</div>
+	
 	<div class="Boards">
 		<c:forEach items="${boardList}" var="board" varStatus="i">
 			<div id="output-box1" class="relative">
@@ -157,6 +156,14 @@
 							type="button" name="dislikeNumber" value="${board.dislikeNumber}"
 							class="p-2 bg-red-500 text-white rounded-md dislikeNumber">싫어요
 							${board.dislikeNumber}</button>
+					</form>
+					<form action="/uncomfortable/board/admin/delete.do" method="post">
+						<input type="hidden" name="boardNumber"
+							value="${board.boardNumber}">
+						<button onclick="deletes(${board.boardNumber})"
+							type="button" name="delete"
+							class="p-2 bg-red-500 text-white rounded-md dislikeNumber" style="margin-left:80px;">삭제
+							</button>
 					</form>
 				</div>
 			</div>
@@ -203,6 +210,25 @@
         location.reload();
     }
 
+    function deletes(boardNumber) {
+    	// 서버로 싫어요 클릭을 전송
+		alert (' 삭제되었습니다.');
+    	
+        // 서버로 좋아요 클릭을 전송
+        fetch('/uncomfortable/board/admin/delete.do', { 
+        	method: 'POST',
+        	 cache: 'no-cache',
+        	    headers: {
+        	        'Content-Type': 'application/x-www-form-urlencoded'
+        	    },
+        	    body: 'boardNumber='+document.querySelectorAll(".boardNumber")[boardNumber-1].value
+        	})
+            .then(response => response.json());    
+            
+        location.reload();
+		
+    }
+    
     function submitComment() {
         // 백엔드에서 가져올 텍스트 대신에 임시로 "텍스트"를 표시
         if(document.querySelector(".content").value == ''){
@@ -226,7 +252,6 @@
         }
 		
     }
-    
 </script>
 
 	<script

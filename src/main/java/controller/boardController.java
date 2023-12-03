@@ -37,14 +37,25 @@ public class boardController extends HttpServlet {
 		if (command.equals("/board/write.do")) {// 글 등록하기
 			requestBoardWrite(request);
 			// FIXME jsp 부분 변경해야함.
-			RequestDispatcher rd = request.getRequestDispatcher("/");
-			rd.forward(request, response);
+			UserVO user = (UserVO) request.getSession().getAttribute("user");
+			if(user == null) {
+				RequestDispatcher rd = request.getRequestDispatcher("/user/login");
+				rd.forward(request, response);
+			}else {
+				RequestDispatcher rd = request.getRequestDispatcher("/board");
+				rd.forward(request, response);
+			}
 			return ;
 		}
 		// 글 조회하기
 		else if (command.equals("/board")) {
 			try {
 				UserVO user = (UserVO) request.getSession().getAttribute("user");
+				if(user.getId().equals("admin")) {
+					RequestDispatcher rd = request.getRequestDispatcher("/board/admin");
+					rd.forward(request, response);
+					return ;
+				}
 				System.out.println(user.getId());
 			} catch (NullPointerException e) {
 				System.out.println("로그인 상태가 아닙니다.");
@@ -56,7 +67,7 @@ public class boardController extends HttpServlet {
 			rd.forward(request, response);
 			return ;
 		}
-
+		
 		// 좋아요 요청
 		if (command.equals("/board/like.do")) {
 			like(request);
@@ -82,8 +93,16 @@ public class boardController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/top.jsp");
 			rd.forward(request, response);
 		}
+		
+		else if (command.equals("/board/admin")) {
+			requestBoardRead(request);
+			RequestDispatcher rd = request.getRequestDispatcher("/mainAdmin.jsp");
+			rd.forward(request, response);
+			return ;
+		}
+		
 		// 글 삭제하기
-		else if (command.equals("/board/delete")) {
+		else if (command.equals("/board/admin/delete.do")) {
 			requestBoardDelete(request);
 			// FIXME jsp 부분 변경해야함.
 			RequestDispatcher rd = request.getRequestDispatcher("./board/delete.jsp");
@@ -128,7 +147,7 @@ public class boardController extends HttpServlet {
 	public void requestBoardDelete(HttpServletRequest request) {
 		BoardDAO dao = new BoardDAO();
 
-		int deleteBoardNumber = Integer.parseInt(request.getAttribute("boardNumber").toString());
+		int deleteBoardNumber = Integer.parseInt(request.getParameter("boardNumber"));
 		dao.delete(deleteBoardNumber);
 	}
 
